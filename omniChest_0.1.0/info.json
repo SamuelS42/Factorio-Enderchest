@@ -1,0 +1,11 @@
+{
+    "name": "omniChest",
+    "version": "0.1.0",
+    "title": "Omni Chest",
+    "author": "Evorionos, Anon Nullings",
+    "contact": "",
+    "homepage": "",
+    "factorio_version": "0.16",
+    "dependencies": ["base >= 0.16"],
+    "description": "This mod adds various things including Omni Chest."
+}
