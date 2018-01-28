@@ -1,0 +1,11 @@
+{
+    "name": "fallout",
+    "version": "0.1.0",
+    "title": "Fallout",
+    "author": "Evorionos",
+    "contact": "",
+    "homepage": "",
+    "factorio_version": "0.15",
+    "dependencies": ["base >= 0.15"],
+    "description": "This mod adds various things including Fallout."
+}
