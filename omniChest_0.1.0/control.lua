@@ -15,12 +15,12 @@ script.on_init(
  end
 )
 
-script.on_event_name({defines.events.on_mod_item_opened},
+script.on_event({defines.events.on_gui_opened},
 function(e)
 		-- createChest
-		if e.item == "omni-chest"then
+		if e.entity.name == "omni-chest"then
 			game.print("This does  too!")
-			game.surfaces[1].create_entity{name="omni-inventory", position={0,0},}
+			
 		end
  end
 )
