@@ -41,13 +41,14 @@ data:extend{
   {
     type = "container",
     name = "omni-inventory",
-    icon = "__base__/graphics/icons/infinity-chest.png",
+    icon = "__base__/graphics/icons/infinity-chest.png", --(I think) this icon only appears in menus
     icon_size = 32,
     minable = nil,
-	destructable = false,
+	destructible = false,
+	collision_mask = {},
     selection_box = nil,
     inventory_size = 32,
-    picture =
+    picture = --This is set to a visible sprite for now, an invisible sprite is located at "__core__/graphics/empty.png"
     {
       filename = "__base__/graphics/entity/infinity-chest/infinity-chest.png",
       priority = "extra-high",
