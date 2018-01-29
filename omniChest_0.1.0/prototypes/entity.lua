@@ -44,6 +44,7 @@ data:extend{
     icon = "__base__/graphics/icons/infinity-chest.png",
     icon_size = 32,
     minable = nil,
+	pushable = false,
 	destructable = false,
     selection_box = nil,
     inventory_size = 32,
