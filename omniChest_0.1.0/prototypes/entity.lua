@@ -43,9 +43,9 @@ data:extend{
     name = "omni-inventory",
     icon = "__base__/graphics/icons/infinity-chest.png",
     icon_size = 32,
-    minable = false,
+    minable = nil,
 	destructable = false,
-    selection_box = false,
+    selection_box = nil,
     inventory_size = 32,
     picture =
     {
