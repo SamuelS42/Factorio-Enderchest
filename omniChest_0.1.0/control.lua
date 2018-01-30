@@ -2,6 +2,7 @@ script.on_event(defines.events.on_console_command,
  function (e)
 	if e.command == "omnichest" then
 		game.print("This does nothing")
+		game.players[e.player_index].opened = global.masterChest
 	end
   end
 )
@@ -9,6 +10,7 @@ script.on_event(defines.events.on_console_command,
 script.on_init(
  function()
 		global.masterChest = game.surfaces[1].create_entity{name="omni-inventory", position={0,0},}
+		
 		global.slaveChests = {}
  end
 )
@@ -17,6 +19,36 @@ script.on_event(defines.events.on_tick,
 	function (e)
 		if e.tick % 30 == 0 then
 			--Sync slave chests to master chest here
+		end
+	end
+)
+
+script.on_event({defines.events.on_player_built_tile, defines.events.on_player_mined_tile, defines.events.on_player_mined_entity },
+	function (e)
+		if game.players[e.player_index].character_reach_distance_bonus ~= 0 then
+			--prevent abuse of long reach, this may be obsolete
+			game.players[e.player_index].character_reach_distance_bonus = 0
+		end
+	end
+)
+
+script.on_event({defines.events.on_gui_closed},
+	function (e)
+			-- try abusing this. you can only mine entities in sight, not build, as far as i tested. for me this is enough
+			game.players[e.player_index].character_reach_distance_bonus = 0
+		
+	end
+)
+script.on_event(defines.events.on_gui_opened,
+	function (e)
+		if e.entity ~= nil and e.entity.name == "omni-chest" then
+			--Sync omnichest to chest.
+			game.print("This does nothing")
+			local p = game.players[e.player_index]
+			p.opened = nil
+			p.character_reach_distance_bonus = 1000000000
+			p.opened = global.masterChest
+			
 		end
 	end
 )
