@@ -10,7 +10,7 @@ script.on_event(defines.events.on_console_command,
 script.on_init(
  function()
 		global.masterChest = game.surfaces[1].create_entity{name="omni-inventory", position={0,0},}
-		
+		global.combinators = {}
 		global.slaveChests = {}
  end
 )
@@ -18,11 +18,17 @@ script.on_init(
 script.on_event(defines.events.on_tick,
 	function (e)
 		if e.tick % 60 == 0 then
-			--Sync slave chests to master chest here
-			-- good idea
-			--but how
+			local signals = {}
+			for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
+				table.insert(signals, {signal=k, count=j})
+			end
+			for v in pairs(global.combinators) do
+				for i, signal in signals do
+					v.set_signal(i, signal)
+				end
+			end
 			
-			for i, v in pairs(global.slaveChests) do
+			for v in pairs(global.slaveChests) do
 						
 				--if v.get_inventory(defines.inventory.chest) ~= nil then
 					for k, j in pairs(v.get_inventory(defines.inventory.chest).get_contents()) do
@@ -78,6 +84,8 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 	function (e)
 		if e.created_entity.valid and e.created_entity.name == "omni-chest" then
 			table.insert(global.slaveChests, e.created_entity)
+		elseif e.created_entity.valid and e.created_entity.name == "omni-combinator" then
+			table.insert(global.combinators, e.created_entity)
 		end
 	end
 )
@@ -88,6 +96,13 @@ script.on_event({defines.events.on_player_mined_entity, defines.events.on_robot_
 			for i, v in pairs(global.slaveChests) do
 				if v == e.entity then
 					table.remove(global.slaveChests, i)
+					break
+				end
+			end
+		elseif e.entity.name == "omni-combinator" then
+			for i, v in pairs(global.combinators) do
+				if v == e.entity then
+					table.remove(global.combinators, i)
 					break
 				end
 			end
