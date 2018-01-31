@@ -17,9 +17,29 @@ script.on_init(
 
 script.on_event(defines.events.on_tick,
 	function (e)
-		if e.tick % 30 == 0 then
+		if e.tick % 60 == 0 then
 			--Sync slave chests to master chest here
+			-- good idea
+			--but how
+			
+			for i, v in pairs(global.slaveChests) do
+				--
+				
+				--if v.get_inventory(defines.inventory.chest) ~= nil then
+					for k, j in pairs(v.get_inventory(defines.inventory.chest).get_contents()) do
+						if global.masterChest.can_insert({name= k, count = j}) then
+						global.masterChest.insert({name= k, count = j})
+						v.get_inventory(defines.inventory.chest).clear()
+						end
+					end
+				--end
+				
+				--v.get_output_inventory.remove(v.get_output_inventory.get_contents())
+				
+			end
 		end
+			
+		
 	end
 )
 
