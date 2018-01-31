@@ -20,16 +20,19 @@ script.on_event(defines.events.on_tick,
 	function (e)
 		if e.tick % 60 == 0 then
 			local signals = {}
-			for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
-				table.insert(signals, {signal=k, count=j})
-			end
 			for v in pairs(global.combinators) do
-				for i, signal in signals do
-					v.set_signal(i, signal)
-				end
-			end
+            for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
+                table.insert(signals, {signal=k, count=j})
+            end
+            if #signals > 0 then
+                for j, v in pairs(global.combinators) do
+                    for i, signal in pairs(signals) do
+                        v.get_control_behavior().set_signal(i, signal)
+                    end
+                end
+            end
 			
-			for v in pairs(global.slaveChests) do
+			for l, v in pairs(global.slaveChests) do
 						
 				--if v.get_inventory(defines.inventory.chest) ~= nil then
 					for k, j in pairs(v.get_inventory(defines.inventory.chest).get_contents()) do
@@ -86,10 +89,9 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 		if e.created_entity.valid and e.created_entity.name == "omni-chest" then
 			slaveCombinator = game.surfaces[1].create_entity{name="omni-combinator",position = e.created_entity.position}
 			slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
-			table.insert(global.slaveCombinators, slaveCombinator)
+			table.insert(global.combinators, slaveCombinator)
 			table.insert(global.slaveChests, e.created_entity)
-		elseif e.created_entity.valid and e.created_entity.name == "omni-combinator" then
-			table.insert(global.combinators, e.created_entity)
+		
 		end
 	end
 )
@@ -99,24 +101,14 @@ script.on_event({defines.events.on_player_mined_entity, defines.events.on_robot_
 		if e.entity.name == "omni-chest" then
 			for i, v in pairs(global.slaveChests) do
 				if v == e.entity then
+					thisCombinator = i
 					table.remove(global.slaveChests, i)
 					break
 				end
 			end
-<<<<<<< HEAD
-			for i, v in pairs(global.slaveCombinators) do
-				if v.position == e.entity.position then
-					v.destroy()
-					table.remove(global.slaveCombinators, i)
-=======
-		elseif e.entity.name == "omni-combinator" then
-			for i, v in pairs(global.combinators) do
-				if v == e.entity then
-					table.remove(global.combinators, i)
->>>>>>> a86c535f09477041a93d1979ac32178639dc7a5d
-					break
-				end
-			end
+			combinator = table.remove(global.combinators, i)
+			combinator.destroy()
+			
 		end
 	end
 )
