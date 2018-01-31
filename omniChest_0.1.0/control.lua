@@ -12,6 +12,7 @@ script.on_init(
 		global.masterChest = game.surfaces[1].create_entity{name="omni-inventory", position={0,0},}
 		
 		global.slaveChests = {}
+		global.slaveCombinators = {}
  end
 )
 
@@ -77,6 +78,9 @@ script.on_event(defines.events.on_gui_opened,
 script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity},
 	function (e)
 		if e.created_entity.valid and e.created_entity.name == "omni-chest" then
+			slaveCombinator = game.surfaces[1].create_entity{name="omni-combinator",position = e.created_entity.position}
+			slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
+			table.insert(global.slaveCombinators, slaveCombinator)
 			table.insert(global.slaveChests, e.created_entity)
 		end
 	end
@@ -88,6 +92,13 @@ script.on_event({defines.events.on_player_mined_entity, defines.events.on_robot_
 			for i, v in pairs(global.slaveChests) do
 				if v == e.entity then
 					table.remove(global.slaveChests, i)
+					break
+				end
+			end
+			for i, v in pairs(global.slaveCombinators) do
+				if v.position == e.entity.position then
+					v.destroy()
+					table.remove(global.slaveCombinators, i)
 					break
 				end
 			end

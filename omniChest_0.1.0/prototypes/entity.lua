@@ -63,13 +63,16 @@ data:extend{
     icon = "__base__/graphics/icons/constant-combinator.png",
     icon_size = 32,
     flags = {"placeable-neutral", "player-creation"},
-    minable = {hardness = 0.2, mining_time = 0.5, result = "omni-combinator"},
+    minable = nil,
+	destructible = false,
+	collision_mask = {},
+    selection_box = nil,
+    
+    --picture = --This is set to a visible sprite for now, an invisible sprite is located at "__core__/graphics/empty.png"
     max_health = 120,
     corpse = "small-remnants",
 
-    collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
-    selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-
+  
     item_slot_count = 32,
 
     vehicle_impact_sound =  { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
