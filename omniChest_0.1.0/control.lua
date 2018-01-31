@@ -73,7 +73,7 @@ script.on_event(defines.events.on_gui_opened,
 	function (e)
 		if e.entity ~= nil and e.entity.name == "omni-chest" then
 			--Sync omnichest to chest.
-			game.print("This does nothing")
+			
 			local p = game.players[e.player_index]
 			p.opened = nil
 			p.character_reach_distance_bonus = 1000000000
