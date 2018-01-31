@@ -9,5 +9,16 @@ data:extend{
 		order="a[items]-f[omni-chest]",
 		place_result="omni-chest",
 		stack_size=60000
+	},
+	{
+		type="item",
+		name="omni-combinator",
+		icon="__base__/graphics/icons/constant-combinator.png",
+		icon_size=32,
+		flags={"goes-to-quickbar"},
+		subgroup="storage",
+		order="a[items]-f[omni-chest]",
+		place_result="omni-combinator",
+		stack_size=60000
 	}
 }
