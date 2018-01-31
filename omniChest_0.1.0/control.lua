@@ -110,17 +110,4 @@ script.on_event({defines.events.on_player_mined_entity, defines.events.on_robot_
 			end
 		end
 	end
-    function (e)
-        if e.entity.name == "omni-chest" then
-            for i, v in pairs(global.slaveChests) do
-                if v == e.entity then
-                    thisCombinator = i
-                    table.remove(global.slaveChests, i)
-                    combinator = table.remove(global.combinators, i)
-                    combinator.destroy()
-                    break
-                end
-            end
-        end
-    end
 )
