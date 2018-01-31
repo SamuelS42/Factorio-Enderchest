@@ -48,9 +48,9 @@ data:extend{
 	collision_mask = {},
     selection_box = nil,
     inventory_size = 32,
-    picture = "__core__/graphics/empty.png",
+    picture = 
     {
-      filename = "__base__/graphics/entity/infinity-chest/infinity-chest.png",
+      filename = "__core__/graphics/empty.png",
       priority = "extra-high",
       width = 48,
       height = 34,
@@ -67,8 +67,14 @@ data:extend{
 	destructible = false,
 	collision_mask = {},
     selection_box = nil,
-    
-    picture = "__core__/graphics/empty.png",
+    picture =
+    {
+      filename = "__core__/graphics/empty.png",
+      priority = "extra-high",
+      width = 48,
+      height = 34,
+      shift = {0.1875, 0}
+    },
     max_health = 120,
     corpse = "small-remnants",
 
