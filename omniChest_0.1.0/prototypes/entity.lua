@@ -56,5 +56,39 @@ data:extend{
       height = 34,
       shift = {0.1875, 0}
     }
+  },
+  {
+	type = "constant-combinator",
+    name = "omni-combinator",
+    icon = "__base__/graphics/icons/constant-combinator.png",
+    icon_size = 32,
+    flags = {"placeable-neutral", "player-creation"},
+    minable = {hardness = 0.2, mining_time = 0.5, result = "omni-combinator"},
+    max_health = 120,
+    corpse = "small-remnants",
+
+    collision_box = {{-0.35, -0.35}, {0.35, 0.35}},
+    selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+
+    item_slot_count = 32,
+
+    vehicle_impact_sound =  { filename = "__base__/sound/car-metal-impact.ogg", volume = 0.65 },
+
+    activity_led_light =
+    {
+      intensity = 0.8,
+      size = 1,
+      color = {r = 1.0, g = 1.0, b = 1.0}
+    },
+
+    activity_led_light_offsets =
+    {
+      {0.296875, -0.40625},
+      {0.25, -0.03125},
+      {-0.296875, -0.078125},
+      {-0.21875, -0.46875}
+    },
+
+    circuit_wire_max_distance = 9
   }
 }
