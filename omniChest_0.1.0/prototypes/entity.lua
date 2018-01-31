@@ -48,7 +48,7 @@ data:extend{
 	collision_mask = {},
     selection_box = nil,
     inventory_size = 32,
-    picture = --This is set to a visible sprite for now, an invisible sprite is located at "__core__/graphics/empty.png"
+    picture = "__core__/graphics/empty.png",
     {
       filename = "__base__/graphics/entity/infinity-chest/infinity-chest.png",
       priority = "extra-high",
@@ -68,7 +68,7 @@ data:extend{
 	collision_mask = {},
     selection_box = nil,
     
-    --picture = --This is set to a visible sprite for now, an invisible sprite is located at "__core__/graphics/empty.png"
+    picture = "__core__/graphics/empty.png",
     max_health = 120,
     corpse = "small-remnants",
 

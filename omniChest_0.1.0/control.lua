@@ -1,7 +1,7 @@
 script.on_event(defines.events.on_console_command,
  function (e)
 	if e.command == "omnichest" then
-		game.print("This does nothing")
+		
 		game.players[e.player_index].opened = global.masterChest
 	end
   end
@@ -20,9 +20,8 @@ script.on_event(defines.events.on_tick,
 	function (e)
 		if e.tick % 60 == 0 then
 			local signals = {}
-			for v in pairs(global.combinators) do
             for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
-                table.insert(signals, {signal=k, count=j})
+                table.insert(signals, {signal={type="item", name=k}, count=j})
             end
             if #signals > 0 then
                 for j, v in pairs(global.combinators) do
