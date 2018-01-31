@@ -7,5 +7,14 @@ data:extend{
 			{"iron-plate", 1}
 		},
 		result="omni-chest"
+	},
+	{
+		type="recipe",
+		name="omni-combinator",
+		enabled=true,
+		ingredients={
+			{"iron-plate", 1}
+		},
+		result="omni-combinator"
 	}
 }
