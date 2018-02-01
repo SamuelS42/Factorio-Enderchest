@@ -10,27 +10,13 @@ script.on_init(
  function()
 		global.masterChest = game.surfaces[1].create_entity{name="omni-inventory", position={0,0},}
 		global.slaveChests = {}
-		global.slaveCombinators = {}
+		global.combinators = {}
  end
 )
 
 script.on_event(defines.events.on_tick,
 	function (e)
 		if e.tick % 60 == 0 then
-			local signals = {}
-            for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
-                table.insert(signals, {signal={type="item", name=k}, count=j})
-            end
-			for j, v in pairs(global.combinators) do
-				for i=1,32 do
-					v.get_control_behavior().set_signal(i, nil)
-				end
-				if #signals > 0 then
-					for i, signal in pairs(signals) do
-						v.get_control_behavior().set_signal(i, signal)
-					end
-				end
-			end
 			
 			for l, v in pairs(global.slaveChests) do
 						
@@ -47,10 +33,21 @@ script.on_event(defines.events.on_tick,
 				
 			end
 			
-			
+			local signals = {}
+            for k, j in pairs(global.masterChest.get_inventory(defines.inventory.chest).get_contents()) do
+                table.insert(signals, {signal={type="item", name=k}, count=j})
+            end
+			for j, v in pairs(global.combinators) do
+				for i=1,32 do
+					v.get_control_behavior().set_signal(i, nil)
+				end
+				if #signals > 0 then
+					for i, signal in pairs(signals) do
+						v.get_control_behavior().set_signal(i, signal)
+					end
+				end
+			end
 		end
-			
-		
 	end
 )
 
@@ -88,7 +85,7 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 	function (e)
 		if e.created_entity.valid and e.created_entity.name == "omni-chest" then
 			slaveCombinator = game.surfaces[1].create_entity{name="omni-combinator",position = e.created_entity.position}--{e.created_entity.position.x - 0.25, e.created_entity.position.y - 0.25}}
-			slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
+			--slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
 			table.insert(global.combinators, slaveCombinator)
 			table.insert(global.slaveChests, e.created_entity)
 		
