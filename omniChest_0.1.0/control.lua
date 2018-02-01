@@ -85,7 +85,7 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 	function (e)
 		if e.created_entity.valid and e.created_entity.name == "omni-chest" then
 			slaveCombinator = game.surfaces[1].create_entity{name="omni-combinator",position = e.created_entity.position}--{e.created_entity.position.x - 0.25, e.created_entity.position.y - 0.25}}
-			--slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
+			slaveCombinator.connect_neighbour({wire = defines.wire_type.red, target_entity =  e.created_entity})
 			table.insert(global.combinators, slaveCombinator)
 			table.insert(global.slaveChests, e.created_entity)
 		
